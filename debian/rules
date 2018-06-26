@@ -1,0 +1,19 @@
+#!/usr/bin/make -f
+
+export LANG=C.UTF-8
+export LC_ALL=C.UTF-8
+export REBAR=/usr/bin/rebar
+export PREFIX=/usr
+
+%:
+	dh $@
+
+override_dh_auto_test: .home
+	rc=0; HOME=$(CURDIR)/.home dh_auto_test || rc=$$?; epmd -kill; exit $$rc
+
+override_dh_auto_clean:
+	$(RM) -r .home
+	dh_auto_clean
+
+.home:
+	mkdir $@

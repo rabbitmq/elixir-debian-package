@@ -1,0 +1,101 @@
+elixir-lang (1.6.5-1) unstable; urgency=medium
+
+  [ Antonio Terceiro ]
+  * Drop myself from the Uploaders field
+
+  [ Evgeny Golyshev ]
+  * New upstream release (Closes: #869030)
+    - The tests from the latest version with newer dependencies seem to be
+      fine again (Closes: #871120)
+  * Substitute alioth for salsa in Vcs-Browser and Vcs-Git fields
+  * Add debian/upstream/metadata
+  * Remove Testsuite from debian/control
+  * Bump Standards-Version to 4.1.4
+  * Bump compat version to 10
+  * Add docs file containing NOTICE
+  * Use only https in Format field of debian/copyright
+  * Do not mention lib/elixir/src/elixir_parser.erl in debian/copyright
+  * Disable one more rebar3 related test
+  * Temporarily disable rebar related test
+
+ -- Evgeny Golyshev <eugulixes@gmail.com>  Wed, 09 May 2018 23:22:08 +0300
+
+elixir-lang (1.3.3-2) unstable; urgency=medium
+
+  * Add erlang-crypto to Build-Depends (Closes: #837236)
+
+ -- Evgeny Golyshev <eugulixes@gmail.com>  Wed, 05 Oct 2016 22:43:17 +0300
+
+elixir-lang (1.3.3-1) unstable; urgency=medium
+
+  * New upstream release
+  * Add patch disabling tests related to rebar3
+
+ -- Evgeny Golyshev <eugulixes@gmail.com>  Sun, 18 Sep 2016 16:25:14 +0300
+
+elixir-lang (1.2.6-1) unstable; urgency=medium
+
+  * Evgeny is now the maintainer
+
+  [ Antonio Terceiro ]
+  * New upstream release
+  * Acknowledge Non-maintainer upload; thanks to Anton Gladky and Sergei
+    Golovan.
+  * debian/rules:
+    - also set LC_ALL=C.UTF-8 since the VM requires UTF-8 for correct
+      operation.
+    - kill epmd after running tests here instead of with a patch to the
+      Makefile (Closes: #819122)
+  * debian/control:
+    - Bump Standards-Version to 3.9.8, no other changes needed
+    - Use https:// URL's for Vcs-*
+
+  [ Evgeny Golyshev ]
+  * Add patch disabling tests related to rebar3
+
+ -- Antonio Terceiro <terceiro@debian.org>  Thu, 16 Jun 2016 09:48:49 -0300
+
+elixir-lang (1.1.0-1.1) unstable; urgency=medium
+
+  [ Anton Gladky ]
+  * Non-maintainer upload.
+
+  [ Sergei Golovan ]
+  * Kill daemon after test phase. (Closes: #819122)
+
+ -- Anton Gladky <gladk@debian.org>  Fri, 13 May 2016 21:02:10 +0200
+
+elixir-lang (1.1.0-1) unstable; urgency=medium
+
+  [ Evgeny Golyshev ]
+  * Replace dependency on `erlang` with `erlang-base`. This avoids pulling
+    several X11-related packages when installing on a headless system.
+  * Improved package description
+
+  [ Antonio Terceiro ]
+  * New upstream release. This package will now be based on released upstream
+    tarballs.
+  * debian/watch: restrict to final releases
+  * debian/copyright:
+    - add `rebar` to Files-Excluded.
+  * debian/control:
+    - Switch Architecture: from `any` to `all`. Elixir code gets compiled to
+      bytecode for the Erlang VM, so it is not architecture dependent.
+    - Build-Depends:
+      + remove `erlang` (but keep `erlang-dev)
+      + add erlang-parsetools, erlang-eunit
+
+ -- Antonio Terceiro <terceiro@debian.org>  Mon, 28 Sep 2015 11:14:32 -0300
+
+elixir-lang (1.1.0~0.20150708-1) unstable; urgency=medium
+
+  * New upstream snapshot
+    + fixed to work with Erlang/OTP 18 (Closes: #791626)
+
+ -- Antonio Terceiro <terceiro@debian.org>  Wed, 08 Jul 2015 18:29:52 -0300
+
+elixir-lang (1.1.0~0.20150516-1) unstable; urgency=medium
+
+  * Initial release (Closes: #765522)
+
+ -- Antonio Terceiro <terceiro@debian.org>  Sat, 16 May 2015 17:08:30 -0300

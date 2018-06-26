@@ -1,0 +1,27 @@
+Source: elixir-lang
+Section: interpreters
+Priority: optional
+Maintainer: Evgeny Golyshev <eugulixes@gmail.com>
+Build-Depends: debhelper (>= 10),
+               erlang-crypto (>= 1:19),
+               erlang-dev (>= 1:19),
+               erlang-dialyzer (>= 1:19),
+               erlang-eunit (>= 1:19),
+               erlang-parsetools (>= 1:19),
+               erlang-src (>= 1:19),
+               git,
+               rebar
+Standards-Version: 4.1.4
+Vcs-Git: https://salsa.debian.org/eugulixes-guest/elixir-lang.git
+Vcs-Browser: https://salsa.debian.org/eugulixes-guest/elixir-lang
+Homepage: http://elixir-lang.org/
+
+Package: elixir
+Architecture: all
+Depends: erlang-base (>= 1:19) | erlang-base-hipe (>= 1:19),
+         ${misc:Depends}
+Description: functional meta-programming aware language
+ Elixir is a functional meta-programming aware language intended primarily for
+ developing distributed, fault-tolerant and scalable systems. Elixir source
+ code is compiled to bytecode for the Erlang Virtual Machine (EVM), and can use
+ Erlang libraries transparently.
