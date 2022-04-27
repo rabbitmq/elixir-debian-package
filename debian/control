@@ -2,7 +2,7 @@ Source: elixir-lang
 Section: interpreters
 Priority: optional
 Maintainer: Evgeny Golyshev <eugulixes@gmail.com>
-Build-Depends: debhelper-compat (= 13),
+Build-Depends: debhelper-compat (= 12),
                erlang-crypto (>= 1:22),
                erlang-dev (>= 1:22),
                erlang-dialyzer (>= 1:22),
