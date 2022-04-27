@@ -1,7 +1,7 @@
-#!/bin/sh
+#!/bin/bash
 
 exec 2>&1
-set -e
+set -eE
 
 banner() {
   echo
@@ -10,11 +10,50 @@ banner() {
   echo
 }
 
+cleanup() {
+  rm  -f /usr/lib/elixir/VERSION
+  rm  -f /usr/lib/elixir/lib/iex/mix.exs
+  rm -rf /usr/lib/elixir/lib/elixir/src
+
+  for lib in $(ls lib); do
+    rm -rf "/usr/lib/elixir/lib/${lib}/lib" \
+           "/usr/lib/elixir/lib/${lib}/test" \
+           "/usr/lib/elixir/lib/${lib}/tmp"
+  done
+
+  epmd -kill
+}
+
+export HOME="${AUTOPKGTEST_TMP}"
+
+export REBAR=/usr/bin/rebar
+
+# Calls the cleanup function on the following signals: SIGHUP, SIGINT, SIGQUIT
+# and SIGABRT.
+trap "cleanup && exit 130" 2
+trap "cleanup" 1 3 6 ERR
+
+epmd -daemon
+
 failed=0
+
+# The Elixir tests are very sensitive to the place they are located relatively
+# to the elixir executable via which they are invoked. Moreover, the tests
+# depend on some files which are parts of the source tree.
+
+cp VERSION /usr/lib/elixir
+
+cp lib/iex/mix.exs /usr/lib/elixir/lib/iex
+
+cp -r lib/elixir/src /usr/lib/elixir/lib/elixir
+
+for lib in $(ls lib); do
+  cp -r "lib/${lib}/lib" "lib/${lib}/test" "/usr/lib/elixir/lib/${lib}"
+done
 
 (
   banner stdlib
-  cd lib/elixir
+  cd /usr/lib/elixir/lib/elixir
   elixir -r "test/elixir/test_helper.exs" -pr "test/elixir/**/*_test.exs"
 ) || failed=1
 
@@ -22,10 +61,12 @@ for lib in $(ls -1 lib | grep -v elixir); do
   (
     banner $lib
     set -x
-    cd lib/$lib
+    cd "/usr/lib/elixir/lib/${lib}"
     elixir -r "test/test_helper.exs" -pr "test/**/*_test.exs"
   ) || failed=1
 done
+
+cleanup
 
 exit $failed
 

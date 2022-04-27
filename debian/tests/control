@@ -1,1 +1,3 @@
 Tests: run-all
+Depends: @, bash, erlang-inets, erlang-parsetools, git, rebar
+Restrictions: isolation-container, needs-root

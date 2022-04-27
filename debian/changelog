@@ -1,56 +1,111 @@
-elixir-lang (1.10.4-1) unstable; urgency=medium
+elixir-lang (1.12.2.dfsg-2) unstable; urgency=medium
+
+  * Fix debian/watch
+  * Use debhelper 13
+
+ -- Evgeny Golyshev <eugulixes@gmail.com>  Tue, 24 Aug 2021 16:41:05 +0300
+
+elixir-lang (1.12.2.dfsg-1) unstable; urgency=medium
+
+  * New upstream release (closes: #992719).
+  * Require Erlang 22.0 or later.
+  * Remove use_rebar_instead_of_rebar3_in_tests.patch since it was accepted to
+    upstream (see https://github.com/elixir-lang/elixir/pull/10022).
+  * Update debian/patches/remove_rebar3_related_tests.patch.
+
+ -- Evgeny Golyshev <eugulixes@gmail.com>  Tue, 24 Aug 2021 14:42:48 +0300
+
+elixir-lang (1.10.3.dfsg-1.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Remove dependency of the elixir binary package on erlang-pcre-<version>,
+    because it isn't necessary anymore (closes: #963043).
+
+ -- Sergei Golovan <sgolovan@debian.org>  Thu, 18 Jun 2020 18:22:53 +0300
+
+elixir-lang (1.10.3.dfsg-1) unstable; urgency=medium
+
+  * New upstream release (closes: #959701, #959160, #959988).
+  * Remove patches/remove-test-executes-rpc-instructions.patch.
+  * Require Erlang 21.0 or later.
+
+ -- Evgeny Golyshev <eugulixes@gmail.com>  Wed, 06 May 2020 20:33:40 +0300
+
+elixir-lang (1.9.1.dfsg-1.3) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Add remove-test-executes-rpc-instructions.patch, as this test reliably
+    fails on arm64 and mips64el.
+
+ -- Thomas Goirand <zigo@debian.org>  Mon, 04 Nov 2019 11:27:07 +0100
+
+elixir-lang (1.9.1.dfsg-1.2) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Re-attempt unit testing (up to 3 times) if failed (Closes: #942688).
+
+ -- Thomas Goirand <zigo@debian.org>  Wed, 30 Oct 2019 12:23:33 +0100
+
+elixir-lang (1.9.1.dfsg-1.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Add a dependency of the elixir binary package on erlang-pcre-<version>
+    virtual package to prevent installation when PCRE in Erlang changes,
+    invalidating precompiled regexes (closes: #941124).
+  * Move to ${erlang:Depends} substitution variable to calculate the
+    dependencies automatically.
+
+ -- Sergei Golovan <sgolovan@debian.org>  Sun, 13 Oct 2019 09:39:24 +0300
+
+elixir-lang (1.9.1.dfsg-1) unstable; urgency=medium
 
   * New upstream release.
+  * Elixir is endianness-dependent, so substitute 'Architecture: all' for
+    'Architecture: any' in debian/control.
+  * Increase version number of Erlang in debian/control.
+  * Remove disable_tests_to_prevent_failing_with_erlang_22.patch.
+  * Adapt remove_rebar3_related_tests.patch to the current Elixir release.
+  * Improve debian/tests/run-all
+    - do cleanup more carefully after running tests;
+    - do cleanup on the following signals: SIGHUP, SIGINT, SIGQUIT and SIGABRT;
+    - use bash instead of dash.
 
- -- RabbitMQ Team <info@rabbitmq.com>  Wed, 07 Oct 2020 09:41:31 +0000
+ -- Evgeny Golyshev <eugulixes@gmail.com>  Fri, 19 Jul 2019 13:29:07 +0300
 
-elixir-lang (1.9.4-1) unstable; urgency=medium
+elixir-lang (1.7.4.dfsg-2) unstable; urgency=medium
 
-  * New upstream release.
+  * Fix debian/tests/run-all to make it run tests properly.
 
- -- RabbitMQ Team <info@rabbitmq.com>  Thu, 07 Nov 2019 10:42:41 +0000
+ -- Evgeny Golyshev <eugulixes@gmail.com>  Thu, 18 Jul 2019 12:36:34 +0300
 
-elixir-lang (1.9.2-1) unstable; urgency=medium
+elixir-lang (1.7.4.dfsg-1) unstable; urgency=medium
 
-  * New upstream release.
+  * Apply patch provided by Tomas Janousek (Closes: #930497)
+    - The patch makes Elixir explicitly depend on
+      erlang-base:any | erlang-base-hipe:any
+  * Exclude lib/mix/test/fixtures/rebar and lib/mix/test/fixtures/rebar3.
+  * Specify license for lib/elixir/unicode/*.txt in debian/copyright.
+  * Add remove_rebar3_related_tests.patch not to run the rebar3 related
+    tests because we don't have rebar3.
+  * Add use_rebar_instead_of_rebar3_in_tests.patch to fix the bug which
+    made the Mix tests use only rebar3.
+  * Add .dfsg suffix to the package version number to make it clear that
+    the upstream archive must be repacked with the purpose of removing
+    such binaries as rebar and rebar3.
+  * Add disable_tests_to_prevent_failing_with_erlang_22.patch to disable the
+    tests which fail under Erlang/OTP 22.
 
- -- RabbitMQ Team <info@rabbitmq.com>  Fri, 11 Oct 2019 22:26:08 +0000
+ -- Evgeny Golyshev <eugulixes@gmail.com>  Sun, 14 Jul 2019 23:38:27 +0300
 
-elixir-lang (1.9.1-1) unstable; urgency=medium
+elixir-lang (1.7.4-0.1) unstable; urgency=medium
 
-  * New upstream release.
+  * Non-maintainer upload with authorization from current maintainer.
+  * New upstream release:
+    - Fixes FTBFS (Closes: #910307).
+  * Removed all patches.
+  * Add patch to remove the UTF-8 warning (Closes: #912207).
 
- -- RabbitMQ Team <info@rabbitmq.com>  Thu, 18 Jul 2019 10:36:20 +0000
-
-elixir-lang (1.9.0-1) unstable; urgency=medium
-
-  * New upstream release.
-
- -- RabbitMQ Team <info@rabbitmq.com>  Wed, 17 Jul 2019 09:04:45 +0000
-
-elixir-lang (1.8.2-1) unstable; urgency=medium
-
-  * New upstream release.
-
- -- RabbitMQ Team <info@rabbitmq.com>  Sun, 12 May 2019 14:48:40 +0000
-
-elixir-lang (1.8.1-1) unstable; urgency=medium
-
-  * New upstream release.
-
- -- RabbitMQ Team <info@rabbitmq.com>  Fri, 19 Apr 2019 14:15:03 +0000
-
-elixir-lang (1.7.4-1) unstable; urgency=medium
-
-  * New upstream release.
-
- -- RabbitMQ Team <info@rabbitmq.com>  Fri, 19 Apr 2019 03:31:20 +0000
-
-elixir-lang (1.6.6-1) unstable; urgency=medium
-
-  * New upstream release.
-
- -- RabbitMQ Team <info@rabbitmq.com>  Tue, 26 Jun 2018 13:59:34 +0000
+ -- Thomas Goirand <zigo@debian.org>  Tue, 30 Oct 2018 07:56:01 +0000
 
 elixir-lang (1.6.5-1) unstable; urgency=medium
 
