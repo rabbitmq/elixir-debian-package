@@ -1,3 +1,9 @@
+elixir-lang (1.15.0-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- RabbitMQ Team <info@rabbitmq.com>  Tue, 20 Jun 2023 22:45:05 +0000
+
 elixir-lang (1.14.5-1) unstable; urgency=medium
 
   * New upstream release.
