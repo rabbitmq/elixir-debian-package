@@ -1,0 +1,15 @@
+Author: Sergei Golovan <sgolovan@debian.org>
+Description: Patch adapts the asserted error message to Erlang 24.1
+Last-Modified: Tue, 12 Oct 2021 14:48:53 +0300
+
+--- a/lib/elixir/test/elixir/exception_test.exs
++++ b/lib/elixir/test/elixir/exception_test.exs
+@@ -539,6 +539,8 @@
+       message = blame_message(:erlang, & &1.gt_cookie())
+       assert message =~ "function :erlang.gt_cookie/0 is undefined or private. Did you mean:"
+       assert message =~ "* get_cookie/0"
++      assert message =~ "* get_cookie/1"
++      assert message =~ "* set_cookie/1"
+       assert message =~ "* set_cookie/2"
+     end
+ 
