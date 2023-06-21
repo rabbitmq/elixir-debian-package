@@ -3,12 +3,12 @@ Section: interpreters
 Priority: optional
 Maintainer: Evgeny Golyshev <eugulixes@gmail.com>
 Build-Depends: debhelper-compat (= 12),
-               erlang-crypto (>= 1:22),
-               erlang-dev (>= 1:22),
-               erlang-dialyzer (>= 1:22),
-               erlang-eunit (>= 1:22),
-               erlang-parsetools (>= 1:22),
-               erlang-src (>= 1:22),
+               erlang-crypto (>= 1:24),
+               erlang-dev (>= 1:24),
+               erlang-dialyzer (>= 1:24),
+               erlang-eunit (>= 1:24),
+               erlang-parsetools (>= 1:24),
+               erlang-src (>= 1:24),
                git,
                rebar
 Standards-Version: 4.6.0
